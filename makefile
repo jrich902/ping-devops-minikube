@@ -16,3 +16,5 @@ check:
 
 apply:
 	./helm.sh apply
+upgrade:
+	./helm.sh upgrade

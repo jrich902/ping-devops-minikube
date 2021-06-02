@@ -154,6 +154,18 @@ function cleanup_chart {
     fi
 }
 
+function upgrade_chart {
+    echo "Deleting Chart from the Kuberentes Cluster..."
+    if helm upgrade "$helm_chart_name"
+    then
+        echo "Upgraded $helm_chart_name Chart form the cluster!"
+    else
+        echo "Failed to upgrade Chart"
+        echo "please check Helm docs for more info"
+        echo "https://helm.sh/docs/helm/"
+    fi
+}
+
 case $1 in 
 check)
     echo "Checking system and current dir for Helm requirements..."
@@ -176,6 +188,10 @@ apply)
 cleanup)
     echo "Cleaning up chart..."
     cleanup_chart
+    ;;
+upgrade)
+    echo "Upgrading chart..."
+    upgrade_chart
     ;;
 *)
     echo "Help msg here"
