@@ -16,7 +16,8 @@ function init {
         echo "Minikube is running, use:\n kubectl get nodes\n to ensure you can interact with the minikube instance."
     else
         echo "Starting Minikube"
-        minikube start -p $profile --cpus 8 --memory 16g
+        minikube start -p $profile --cpus 8 --memory 16g --vm=true
+        minikube addons enable ingress -p $profile
     fi
 }
 
