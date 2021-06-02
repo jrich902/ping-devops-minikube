@@ -112,7 +112,7 @@ function init_values {
         echo "Values file found, skipping..."
     else
         echo "Downloading Values file"
-        curl https://raw.githubusercontent.com/pingidentity/helm-charts/master/charts/ping-devops/values.yaml > ping-devops-values.yaml
+        curl https://helm.pingidentity.com/examples/everything.yaml > ping-devops-values.yaml
     fi
 }
 
