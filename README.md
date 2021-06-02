@@ -25,8 +25,8 @@ To use this tool you just need to clone the repo to your macbook where ever you 
 Clone this repo to your mac.
 ```bash
 cd ~/projects
-git@gitlab.corp.pingidentity.com:gso-labs/local_helm.git
-cd local_helm
+git clone <ssh-url>
+cd ping-devops-minikube
 ```
 
 Run Make init to set up Helm and Minikube. 
