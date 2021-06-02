@@ -156,7 +156,7 @@ function cleanup_chart {
 
 function upgrade_chart {
     echo "Deleting Chart from the Kuberentes Cluster..."
-    if helm upgrade "$helm_chart_name"
+    if helm upgrade "$helm_chart_name" pingidentity/ping-devops -f ping-devops-values.yaml
     then
         echo "Upgraded $helm_chart_name Chart form the cluster!"
     else
