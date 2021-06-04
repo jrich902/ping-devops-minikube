@@ -1,7 +1,18 @@
 #! /bin/bash
 helm_chart_name=$(pwd | sed 's#.*/##' | awk '{print tolower($0)}')
 echo $helm_chart_name
+pwd=$(pwd | sed 's#.*/##')
+pwd=$(echo $pwd | sed 's/_/-/g')
+profile="Minikube-$pwd"
 #check for helm, 
+function set_context {
+    echo "Setting kubectl context to: $profile"
+    if ! kubectx $profile
+    then
+        echo "Failed to change context."
+    fi
+}
+
 function helm_check {
     if helm version | grep Version:\"v3 > /dev/null
     then
@@ -165,7 +176,7 @@ function upgrade_chart {
         echo "https://helm.sh/docs/helm/"
     fi
 }
-
+set_context
 case $1 in 
 check)
     echo "Checking system and current dir for Helm requirements..."
@@ -191,6 +202,7 @@ cleanup)
     ;;
 upgrade)
     echo "Upgrading chart..."
+    kubectx
     upgrade_chart
     ;;
 *)
