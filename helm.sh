@@ -202,7 +202,6 @@ cleanup)
     ;;
 upgrade)
     echo "Upgrading chart..."
-    kubectx
     upgrade_chart
     ;;
 *)
