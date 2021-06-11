@@ -1,13 +1,16 @@
 #! /bin/bash
-function init {
-    echo "Checking for Minikube install..."
+function profile_name {
+    #setting up profile name
     if [ -n "$1" ]; then
         profile=$1
-    else
+    else 
         pwd=$(pwd | sed 's#.*/##')
         pwd=$(echo $pwd | sed 's/_/-/g')
         profile="Minikube-$pwd"
     fi
+}
+function init {
+    profile_name
     echo "Creating minikube profile:"
     echo $profile
     
@@ -22,14 +25,7 @@ function init {
 }
 
 function cleanup {
-    #setting up profile name
-    if [ -n "$1" ]; then
-        profile=$1
-    else 
-        pwd=$(pwd | sed 's#.*/##')
-        pwd=$(echo $pwd | sed 's/_/-/g')
-        profile="Minikube-$pwd"
-    fi
+    profile_name
     echo "Cleaning up Profile $profile..."
     if minikube status -p $profile | grep Running; then
         echo "Stopping Minikube.."
@@ -45,12 +41,21 @@ function cleanup {
         echo "Minikube profile already Deleted!"
     fi
 }
+
+function ip {
+    profile_name
+    minikube -p $profile ip
+}
+
 case $1 in 
 init) 
     init $2
     ;;
 cleanup)
     cleanup $2
+    ;;
+ip)
+    ip $2
     ;;
 *)
     echo "Help:"
